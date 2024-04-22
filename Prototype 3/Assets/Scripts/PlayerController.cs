@@ -17,11 +17,14 @@ public class PlayerController : MonoBehaviour
 
     public bool isOnGround = true;
     private float speed = 30;
+    public ParticleSystem dirtParticle;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
+              
         {
+            dirtParticle.Stop();
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             {
@@ -30,18 +33,21 @@ public class PlayerController : MonoBehaviour
         }
     }
     public bool gameOver = false;
-    public ParticleSystem explosionParticle'
+    public ParticleSystem explosionParticle;
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Ground"))
+            
         {
+            dirtParticle.Play();
             isOnGround = true;
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
+            
         {
             explosionParticle.Play();
-        }
-        {
+            dirtParticle.Stop();
+        
             Debug.Log("Game Over!");
             gameOver = true;
             playerAnim.SetBool("Death_b", true);
