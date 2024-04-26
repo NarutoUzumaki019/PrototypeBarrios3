@@ -37,27 +37,38 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    public bool gameOver = false;
+    public bool doubleJumpUsed = false;
+    public float doubleJumpForce;
     public ParticleSystem explosionParticle;
+    public bool gameOver = false;  
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Ground"))
-            
+
         {
             dirtParticle.Play();
             isOnGround = true;
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
-            
+
         {
             explosionParticle.Play();
             dirtParticle.Stop();
-        
+
             Debug.Log("Game Over!");
             gameOver = true;
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
             playerAudio.PlayOneShot(crashSound, 1.0f);
-        }   
+
+            doubleJumpUsed = false;
+        }
+        else if(Input.GetKeyDown(KeyCode.Space)&&!isOnGround && !doubleJumpUsed)
+        {
+            doubleJumpUsed = true;
+            playerRb.AddForce(Vector3.up*doubleJumpForce, ForceMode.Impulse);
+            playerAnim.Play("Running_Jump", 3, 0f);
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
+        }
     }
 }
