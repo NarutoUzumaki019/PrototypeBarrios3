@@ -812,7 +812,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 113ee460fadc340e4957a7404a9fbb27, type: 3}
   crashSound: {fileID: 8300000, guid: 4bcde6de2166e41e284ec46d8a01fb90, type: 3}
   doubleJumpUsed: 0
-  doubleJumpForce: 400
+  doubleJumpForce: 3.5
   explosionParticle: {fileID: 1910428784}
   gameOver: 0
 --- !u!4 &1184931209 stripped

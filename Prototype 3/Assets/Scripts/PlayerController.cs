@@ -26,21 +26,39 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
-              
+
         {
             dirtParticle.Stop();
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAudio.PlayOneShot(jumpSound, 1.0f);
-            {
-                playerAnim.SetTrigger("Jump_trig");
-            }
+            playerAnim.SetTrigger("Jump_trig");
+
+            doubleJumpUsed = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && !isOnGround && !doubleJumpUsed)
+        {
+            doubleJumpUsed = true;
+            playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
+            playerAnim.Play("Running_Jump", 3, 0f);
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift));
+        {
+            doubleSpeed = true;
+            playerAnim.SetFloat("SpeedMultiplier", 2.0f);
+        } 
+        else if (doubleSpeed)
+        {
+            doubleSpeed = false;
+            playerAnim.SetFloat("Speed_Multiplier", 1.0f);
         }
     }
     public bool doubleJumpUsed = false;
     public float doubleJumpForce;
     public ParticleSystem explosionParticle;
-    public bool gameOver = false;  
+    public bool gameOver = false;
+    public bool doubleSpeed = false;
 
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Ground"))
@@ -60,15 +78,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
             playerAudio.PlayOneShot(crashSound, 1.0f);
-
-            doubleJumpUsed = false;
         }
-        else if(Input.GetKeyDown(KeyCode.Space)&&!isOnGround && !doubleJumpUsed)
-        {
-            doubleJumpUsed = true;
-            playerRb.AddForce(Vector3.up*doubleJumpForce, ForceMode.Impulse);
-            playerAnim.Play("Running_Jump", 3, 0f);
-            playerAudio.PlayOneShot(jumpSound, 1.0f);
-        }
+        
     }
 }
