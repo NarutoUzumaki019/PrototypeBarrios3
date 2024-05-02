@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.Play("Running_Jump", 3, 0f);
             playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift));
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             doubleSpeed = true;
             playerAnim.SetFloat("SpeedMultiplier", 2.0f);

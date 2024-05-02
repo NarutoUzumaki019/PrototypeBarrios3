@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
-{ 
-    
+{
+
     private float speed = 25;
     private PlayerController playerControllerScript;
 
@@ -15,17 +15,24 @@ public class MoveLeft : MonoBehaviour
     }
     private float leftBound = -15;
 
-    void Update() 
+    void Update()
     {
-        if (playerControllerScript.gameOver == false) 
+        if (playerControllerScript.gameOver == false)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * speed);
+            if (playerControllerScript.doubleSpeed)
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * (speed * 2));
+            }
+            else
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * speed);
+            }
+
+            if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
+            {
+                Destroy(gameObject);
+            }
         }
 
-        if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle")) 
-        {
-            Destroy(gameObject);
-        } 
     }
-    
 }
