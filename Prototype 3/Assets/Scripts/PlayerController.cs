@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dirtParticle;
     public AudioClip jumpSound;
     public AudioClip crashSound;
+    private object PlayerControllerScript;
+    public object gameOver = true;
+
+    
 
     void Update()
     {
@@ -47,13 +51,20 @@ public class PlayerController : MonoBehaviour
         {
             doubleSpeed = true;
             playerAnim.SetFloat("SpeedMultiplier", 2.0f);
-        } 
+        }
         else if (doubleSpeed)
         {
             doubleSpeed = false;
             playerAnim.SetFloat("Speed_Multiplier", 1.0f);
         }
+        {
+            if (PlayerControllerScript.gameOver == false)
+            {
+                if (PlayerControllerScript.doubleSpeed)
+            }
+        }
     }
+    
     public bool doubleJumpUsed = false;
     public float doubleJumpForce;
     public ParticleSystem explosionParticle;
