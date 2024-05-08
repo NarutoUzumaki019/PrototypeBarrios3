@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         Physics.gravity *= gravityModifier;
     }
-
     public bool isOnGround = true;
     private float speed = 30;
     public ParticleSystem dirtParticle;
@@ -24,9 +23,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip crashSound;
     private object PlayerControllerScript;
     public object gameOver = true;
-
-    
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
@@ -64,13 +60,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
     public bool doubleJumpUsed = false;
     public float doubleJumpForce;
     public ParticleSystem explosionParticle;
-    public bool gameOver = false;
     public bool doubleSpeed = false;
-
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Ground"))
 
