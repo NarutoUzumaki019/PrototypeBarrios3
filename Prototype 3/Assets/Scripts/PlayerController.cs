@@ -19,20 +19,20 @@ public class PlayerController : MonoBehaviour
     public bool isOnGround = true;
     private float speed = 30;
     public ParticleSystem dirtParticle;
+    private object animator;
     public AudioClip jumpSound;
     public AudioClip crashSound;
     private object PlayerControllerScript;
-    public object gameOver = true;
+    public object gameOver = false;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
-
         {
             dirtParticle.Stop();
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAudio.PlayOneShot(jumpSound, 1.0f);
-            playerAnim.SetTrigger("Jump_trig");
+            animator.SetTrigger("Jump_trig");
 
             doubleJumpUsed = false;
         }
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             if (PlayerControllerScript.gameOver == false)
             {
-                if (PlayerControllerScript.doubleSpeed)
+                if (PlayerControllerScript.doubleSpeed);
             }
         }
     }

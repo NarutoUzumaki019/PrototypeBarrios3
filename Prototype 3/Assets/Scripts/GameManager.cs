@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public float lerpSpeed;
     void Start()
     {
-        playerControllerScript =
+        playerControllerScript.gameOver  = 
             GameObject.Find("Player").GetComponent<PlayerController>();
         score = 0;
 
@@ -21,18 +21,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!playerControllerScript.gameOver)
+        if (playerControllerScript)
         {
-            if (playerControllerScript.doubleSpeed)
-            {
-                score += 2;
-            }
-            else
-            {
-                score++;
-            }
-            Debug.Log("Score: " + score);
+            return;
         }
+        if (playerControllerScript.doubleSpeed)
+        {
+            score += 2;
+        }
+        else
+        {
+            score++;
+        }
+        Debug.Log("Score: " + score);
     }
 
     IEnumerator PlayIntro()
